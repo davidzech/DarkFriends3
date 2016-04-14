@@ -45,3 +45,18 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+.vs/DarkFriends3/v14/.suo
+DarkFriends3.sdf
+*.opendb
+*.log
+*.obj
+*.tlog
+*.idb
+*.pdb
+*.exe
+Debug
+Release
+packages
+*/bin/
+*/Debug/
+*/Release/
