@@ -52,7 +52,7 @@ bool __fastcall ReadP2PPacket(ISteamNetworking *pThis, void *pubDest, uint32 cub
 	return friends->GetFriendRelationship(*psteamIDRemote) == k_EFriendRelationshipFriend;
 }
 
-bool __fastcall OAcceptP2pSessionWithUser(CSteamID steamIDRemote) {
+bool __fastcall AcceptP2PSessionWithUser(CSteamID steamIDRemote) {
 	ISteamFriends* friends = GetSteamInterface<ISteamFriends>("SteamFriends");
 	if (friends->GetFriendRelationship(steamIDRemote) == k_EFriendRelationshipFriend) {
 		Log("Accepted P2P session request from friend: %llu", steamIDRemote.ConvertToUint64());
@@ -95,6 +95,7 @@ void Bootstrap(BYTE* debug) {
 
 		pVTable[0] = (DWORD64)SendP2PPacket;
 		pVTable[2] = (DWORD64)ReadP2PPacket;
+		pVTable[3] = (DWORD64)AcceptP2PSessionWithUser;
 
 		Log("Replaced P2P Functions");
 
