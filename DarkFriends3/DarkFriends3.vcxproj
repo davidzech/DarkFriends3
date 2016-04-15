@@ -140,7 +140,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\packages\EasyHookNativePackage.2.7.5870.1\build\native\lib\x64\v120\Release;kernel32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\packages\EasyHookNativePackage.2.7.5870.1\build\native\lib\x64\v120\Release\EasyHook64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

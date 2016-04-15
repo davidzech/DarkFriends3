@@ -75,11 +75,11 @@ void Bootstrap(BYTE* debug) {
 	ISteamNetworking* networking = GetSteamInterface<ISteamNetworking>("SteamNetworking");	
 	
 	Log("Found ISteamNetworking at %016X", networking);
-
 	Log("Searching for VTable...");
 
 	DWORD64* pVTable = (DWORD64*)*(DWORD64*)networking;
 	if (pVTable != nullptr) {
+
 		Log("Found VTable at %016X", pVTable);
 		
 		MEMORY_BASIC_INFORMATION mbi;
@@ -89,20 +89,26 @@ void Bootstrap(BYTE* debug) {
 		Log("Marked memory as READ | WRITE");
 		
 		OSendP2PPacket = (PSendP2PPacket)pVTable[0];
-		OReadP2PPacket = (PReadP2PPacket)pVTable[2];
+		//OReadP2PPacket = (PReadP2PPacket)pVTable[2];
+		OAcceptP2PSessionWithUser = (PAcceptP2PSessionWithUser)pVTable[3];
 
 		Log("Backed up original P2P Functions");
+		Log("Hooking functions...");
 
 		pVTable[0] = (DWORD64)SendP2PPacket;
-		pVTable[2] = (DWORD64)ReadP2PPacket;
+		Log("Hooked SendP2PPacket...");
+
+		//pVTable[2] = (DWORD64)ReadP2PPacket;
+		//Log("Hooked ReadP2PPacket...");
+
 		pVTable[3] = (DWORD64)AcceptP2PSessionWithUser;
+		Log("Hooked AcceptP2PSessionWithUser...");
 
 		Log("Replaced P2P Functions");
 
 		VirtualProtect(mbi.BaseAddress, mbi.RegionSize, mbi.Protect, &mbi.Protect);
 
 		Log("Memory reprotected");
-
 		Log("Done hooking functions");
 	}
 	else {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DarkFriendsInjector
 {
-    public class HookInject
+    public static class HookInject
     {
         public static unsafe bool Hook(bool debug)
         {
